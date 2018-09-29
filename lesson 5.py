@@ -23,12 +23,18 @@ from sklearn.neighbors import KNeighborsClassifier
 neighbors_classifier = KNeighborsClassifier()
 
 # Third, custom bare-bones re-implimentation of KNN
+import random
 class ScrappyKNN():
 	def fit(self, x_train, y_train):
-		pass
+		self.x_train = x_train
+		self.y_train = y_train
 	
 	def predict(self, x_test):
-		pass
+		predictions = []
+		for row in x_test:
+			label = random.choice(self.y_train)
+			predictions.append(label)
+		return predictions
 
 scrappy_classifier = ScrappyKNN()
 
