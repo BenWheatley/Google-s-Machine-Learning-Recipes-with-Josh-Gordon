@@ -22,8 +22,8 @@ tree_classifier = tree.DecisionTreeClassifier()
 from sklearn.neighbors import KNeighborsClassifier
 neighbors_classifier = KNeighborsClassifier()
 
-# Third, custom bare-bones re-implimentation of KNN
-import random
+# Third, custom bare-bones re-implimentation of KNN (k=1)
+from scipy.spatial import distance
 class ScrappyKNN():
 	def fit(self, x_train, y_train):
 		self.x_train = x_train
@@ -32,9 +32,19 @@ class ScrappyKNN():
 	def predict(self, x_test):
 		predictions = []
 		for row in x_test:
-			label = random.choice(self.y_train)
+			label = self.closest(row)
 			predictions.append(label)
 		return predictions
+	
+	def closest(self, row):
+		best_distance = distance.euclidean(row, self.x_train[0])
+		best_index = 0
+		for i in range(1, len(self.x_train)):
+			distance_i = distance.euclidean(row, self.x_train[i])
+			if distance_i < best_distance:
+				best_distance = distance_i
+				best_index = i
+		return self.y_train[best_index]
 
 scrappy_classifier = ScrappyKNN()
 
