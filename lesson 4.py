@@ -22,16 +22,6 @@ tree_classifier = tree.DecisionTreeClassifier()
 from sklearn.neighbors import KNeighborsClassifier
 neighbors_classifier = KNeighborsClassifier()
 
-# Third, custom bare-bones re-implimentation of KNN
-class ScrappyKNN():
-	def fit(self, x_train, y_train):
-		pass
-	
-	def predict(self, x_test):
-		pass
-
-scrappy_classifier = ScrappyKNN()
-
 # Method to apply to both classifiers
 from sklearn.metrics import accuracy_score
 def trainPredictAndShow(classifier, comment):
@@ -43,4 +33,3 @@ def trainPredictAndShow(classifier, comment):
 # Show results
 trainPredictAndShow(tree_classifier, "Decision Tree accuracy: ")
 trainPredictAndShow(neighbors_classifier, "K-Neighbors accuracy: ")
-trainPredictAndShow(scrappy_classifier, "Hand-written KNN accuracy: ")
